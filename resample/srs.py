@@ -263,7 +263,7 @@ def main(argv=None, no_exit=False):
 		sample = resample.sample_class_factory(ftype_arg0)
 		is_music = ftype_arg0 in (FileType.FLAC, FileType.MP3)
 
-		t0 = time.clock()
+		t0 = time.perf_counter()
 
 		# for Windows long path work around
 		args0 = ""
@@ -433,7 +433,7 @@ def main(argv=None, no_exit=False):
 			# 1) Read in the SRS file
 			srs_data, tracks = sample.load_srs(srs)
 
-			t1 = time.clock()
+			t1 = time.perf_counter()
 			total = t1 - t0
 			print("SRS Load Complete...          "
 			      "Elapsed Time: {0:.2f}s".format(total))
@@ -450,7 +450,7 @@ def main(argv=None, no_exit=False):
 			    options.no_stored_match_offset or len(sample.cut_data)):
 				tracks = movi.find_sample_streams(tracks, movie)
 
-				t1 = time.clock()
+				t1 = time.perf_counter()
 				total = t1 - t0
 				print("Track Location Complete...    "
 				      "Elapsed Time: {0:.2f}s".format(total))
@@ -468,7 +468,7 @@ def main(argv=None, no_exit=False):
 
 			# 3) Extract those sample streams to memory
 			tracks, attachments = movi.extract_sample_streams(tracks, movie)
-			t1 = time.clock()
+			t1 = time.perf_counter()
 			total = t1 - t0
 			print("Track Extraction Complete...  "
 			      "Elapsed Time: {0:.2f}s".format(total))
@@ -492,7 +492,7 @@ def main(argv=None, no_exit=False):
 				pexit(1, "\nOperation aborted.\n", False)
 
 			def show_attempt_info(sfile):
-				t1 = time.clock()
+				t1 = time.perf_counter()
 				total = t1 - t0
 				print("Rebuild Complete...           "
 					  "Elapsed Time: {0:.2f}s".format(total))
@@ -545,7 +545,7 @@ def main(argv=None, no_exit=False):
 							# extract streams on current offets
 							v.tracks, v.attachments = (movi
 								.extract_sample_streams(v.tracks, movie))
-							t1 = time.clock()
+							t1 = time.perf_counter()
 							total = t1 - t0
 							print("Track Extraction Complete...  "
 								  "Elapsed Time: {0:.2f}s".format(total))
